@@ -12,6 +12,7 @@
       <div class="open-button">
         <el-button plane @click="openURL"> 調べる </el-button>
       </div>
+      <h1> {{stockPrice}}(前日比{{stockDiff}}) </h1>
     </div>
   </div>
 </template>
@@ -25,21 +26,40 @@
     name: 'webapi-sample1',
     methods: {
       openURL () {
-        console.log(this)
+        // console.log(this)
         this.$http.get(proxyURL + '/' + baseURL + this.stockForm.code)
           .then(response => {
-            console.log(response)
-            let rawHTML = response.data
+            // console.log(response)
+            const rawHTML = response.data
             console.log(this.stockForm.code)
             // console.log(rawHTML)
-            let root = fastHTMLParser.parse(rawHTML)
-            console.log(root)
-            console.log(root.querySelector('.yjSt'))
+            const root = fastHTMLParser.parse(rawHTML)
+            // console.log(root)
+            const up = root.querySelector('.icoUpGreen')
+            const dn = root.querySelector('.icoDownRed')
+            const nc = root.querySelector('.icoNoChange')
+            if (up) {
+              console.log(up.firstChild.rawText)
+              this.stockDiff = up.firstChild.rawText
+            }
+            if (dn) {
+              console.log(dn.firstChild.rawText)
+              this.stockDiff = dn.firstChild.rawText
+            }
+            if (nc) {
+              console.log(nc.firstChild.rawText)
+              this.stockDiff = nc.firstChild.rawText
+            }
+            const td = root.querySelectorAll('.stoksPrice')
+            console.log(td[1].firstChild.rawText)
+            this.stockPrice = td[1].firstChild.rawText
           }).catch(error => { console.log(error) })
       }
     },
     data () {
       return {
+        stockPrice: '---',
+        stockDiff: '---',
         stockForm: {
           code: '6758.T'
         },
