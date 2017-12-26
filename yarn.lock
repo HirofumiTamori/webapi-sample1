@@ -167,6 +167,10 @@ anymatch@^1.3.0:
     micromatch "^2.1.5"
     normalize-path "^2.0.0"
 
+apollojs@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/apollojs/-/apollojs-1.3.0.tgz#5f7b00304d9740e2a7be5b52c7c0807d51f9255e"
+
 app-package-builder@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/app-package-builder/-/app-package-builder-2.0.1.tgz#290919193ea44d7d4c4b722a0fe6aa34ac5e06b7"
@@ -3384,6 +3388,13 @@ extsprintf@^1.2.0:
 fast-deep-equal@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/fast-deep-equal/-/fast-deep-equal-1.0.0.tgz#96256a3bc975595eb36d82e9929d060d893439ff"
+
+fast-html-parser@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/fast-html-parser/-/fast-html-parser-1.0.1.tgz#4ecc9683b8bb79afe11a50807b7853e79256cea2"
+  dependencies:
+    apollojs "^1.3.0"
+    entities "^1.1.1"
 
 fast-json-stable-stringify@^2.0.0:
   version "2.0.0"
