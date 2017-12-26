@@ -23,10 +23,10 @@
     name: 'webapi-sample1',
     methods: {
       openURL () {
-        this.$http.get('http://localhost:8080/http://www.yahoo.co.jp')
+        this.$http.get('http://ec2-52-199-92-184.ap-northeast-1.compute.amazonaws.com:8080/https://stocks.finance.yahoo.co.jp/stocks/detail/?code=6758.T')
           .then(response => {
             console.log(response.data)
-          })
+          }).catch(error => { console.log(error) })
       }
     },
     data () {

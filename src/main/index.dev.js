@@ -14,10 +14,15 @@ const host = process.env.HOST || '0.0.0.0';
 // Listen on a specific port via the PORT environment variable
 const port = process.env.PORT || 8080;
 
+console.log(process.env.http_proxy)
+console.log(process.env.https_proxy)
+
 cors_proxy.createServer({
-  originWhitelist: [], // Allow all origins
-  requireHeader: ['origin', 'x-requested-with'],
-  removeHeaders: ['cookie', 'cookie2']
+  //originWhitelist: [], // Allow all origins
+  //requireHeader: ['origin', 'x-requested-with'],
+  //removeHeaders: ['cookie', 'cookie2'],
+  redirectSameOrigin: true,
+  //getProxyForUrl: url => { return('http://omaha.sm.sony.co.jp:3128')}
 }).listen(port, host, function() {
   console.log('Running CORS Anywhere on ' + host + ':' + port);
 });
