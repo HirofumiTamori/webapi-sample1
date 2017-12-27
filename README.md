@@ -1,6 +1,18 @@
 # webapi-sample1
 
-> Web API access example with CORS proxy
+> Web Scraping Sample with CORS proxy using Vue-Electron
+
+#### What's This?
+
+My first vue-electron sample using
+- HTTP Access with axios
+- CORS proxy in main/index.dev.js (Unfortunatelly it does not work behind proxy)
+- HTML Parser with fast-html-parser
+- UI with Element-UI
+- Database with nedb, pure javascript mongo subset DB
+
+##### Function
+Get the stock price by web scraping.
 
 #### Build Setup
 
