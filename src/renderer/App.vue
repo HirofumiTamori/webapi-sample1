@@ -10,11 +10,7 @@
         </el-form>
       </div>
       <div class="input-form" id="code">
-        <el-form ::model="stockForm" ref="stockForm" label-width="120px" class="stock-form">
-          <el-form-item label="株価コード" prop="stockCode">
-            <el-input type="string" v-model="stockForm.code" auto-complete="off"></el-input>
-          </el-form-item>
-        </el-form>
+        <h3>株価コード:{{stockForm.code}} </h3>
       </div>
       <div class="open-button">
         <el-button plane type="primary" @click="dbQuery"> 調べる </el-button>
@@ -70,8 +66,6 @@
             if (!err) {
               if (doc.length >= 1) {
                 this.stockResultsDoc = doc
-                console.log(doc.length)
-                console.log(doc[0].銘柄コード)
                 this.stockForm.code = doc[0].銘柄コード
                 this.stockForm.name = doc[0].銘柄名
                 this.openURL()
@@ -115,6 +109,7 @@
   }
   .input-form#code{
     display: inline-block;
+    text-align: center;
     width: 220px;
   }
   .open-button {
