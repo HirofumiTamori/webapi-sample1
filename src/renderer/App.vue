@@ -82,6 +82,11 @@
           })
       }
     },
+    mounted () { // 起動時実行
+      this.$nextTick(() => { // nextTickの中から呼ぶと子要素のrenderを待てる
+        this.dbQuery()
+      })
+    },
     data () {
       return {
         stockPrice: '---',
