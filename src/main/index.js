@@ -6,7 +6,7 @@ import corsProxy from 'cors-anywhere'
 // Listen on a specific host via the HOST environment variable
 const host = process.env.HOST || '0.0.0.0'
 // Listen on a specific port via the PORT environment variable
-const port = process.env.PORT || 8889
+const port = process.env.PORT || 8080
 
 console.log(process.env.http_proxy)
 console.log(process.env.https_proxy)
@@ -23,13 +23,20 @@ corsProxy.createServer({
 if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
+console.log(process.env.http_proxy)
+console.log(process.env.https_proxy)
 
+corsProxy.createServer({
+  redirectSameOrigin: true
+}).listen(port, host, () => {
+  console.log('Running CORS Anywhere on ' + host + ':' + port)
+})
 let mainWindow
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
 
-function createWindow() {
+function createWindow () {
   /**
    * Initial window options
    */
