@@ -8,14 +8,6 @@ const host = process.env.HOST || '0.0.0.0'
 // Listen on a specific port via the PORT environment variable
 const port = process.env.PORT || 8080
 
-console.log(process.env.http_proxy)
-console.log(process.env.https_proxy)
-
-corsProxy.createServer({
-  redirectSameOrigin: true
-}).listen(port, host, () => {
-  console.log('Running CORS Anywhere on ' + host + ':' + port)
-})
 /**
  * Set `__static` path to static files in production
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-static-assets.html
@@ -26,11 +18,14 @@ if (process.env.NODE_ENV !== 'development') {
 console.log(process.env.http_proxy)
 console.log(process.env.https_proxy)
 
-corsProxy.createServer({
-  redirectSameOrigin: true
-}).listen(port, host, () => {
-  console.log('Running CORS Anywhere on ' + host + ':' + port)
-})
+if (!(process.env.http_proxy || process.env.https_proxy)) { // When No Proxy, set CORS server up on local
+  corsProxy.createServer({
+    redirectSameOrigin: true
+  }).listen(port, host, () => {
+    console.log('Running CORS Anywhere on ' + host + ':' + port)
+  })
+}
+
 let mainWindow
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
