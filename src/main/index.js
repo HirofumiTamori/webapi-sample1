@@ -14,16 +14,18 @@ const port = process.env.PORT || 8080
  */
 if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
-}
-console.log(process.env.http_proxy)
-console.log(process.env.https_proxy)
+} else {
+  // Development mode
+  console.log(process.env.http_proxy)
+  console.log(process.env.https_proxy)
 
-if (!(process.env.http_proxy || process.env.https_proxy)) { // When No Proxy, set CORS server up on local
-  corsProxy.createServer({
-    redirectSameOrigin: true
-  }).listen(port, host, () => {
-    console.log('Running CORS Anywhere on ' + host + ':' + port)
-  })
+  if (!(process.env.http_proxy || process.env.https_proxy)) { // When No Proxy, set CORS server up on local
+    corsProxy.createServer({
+      redirectSameOrigin: true
+    }).listen(port, host, () => {
+      console.log('Running CORS Anywhere on ' + host + ':' + port)
+    })
+  }
 }
 
 let mainWindow

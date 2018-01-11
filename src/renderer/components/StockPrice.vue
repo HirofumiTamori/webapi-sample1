@@ -28,11 +28,14 @@
   const Database = require('nedb')
   const companyListDB = new Database()
   const dbData = require('../db/stocklist.json')
+
   let proxyURL = ''
-  if (process.env.http_proxy || process.env.https_proxy) {
-    proxyURL = 'http://35.194.235.154:8080'
-  } else {
-    proxyURL = 'http://localhost:8080'
+  if (process.env.NODE_ENV === 'development') {
+    if (process.env.http_proxy || process.env.https_proxy) {
+      proxyURL = 'http://35.194.235.154:8080'
+    } else {
+      proxyURL = 'http://localhost:8080'
+    }
   }
 
   companyListDB.insert(dbData, (err, newDoc) => {
